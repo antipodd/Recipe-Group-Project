@@ -423,6 +423,25 @@ var response = {
 	}]
 }
 
+var config = {
+    apiKey: "AIzaSyAh--04dzUCt6Iph2w8xn-cHUMx-Yfj6eM",
+    authDomain: "nutrition-36cb1.firebaseapp.com",
+    databaseURL: "https://nutrition-36cb1.firebaseio.com",
+    storageBucket: "nutrition-36cb1.appspot.com",
+    messagingSenderId: "759784210701"
+  };
+
+firebase.initializeApp(config);
+
+var database = firebase.database();
+
+var userState = {
+	ingredients: "",
+	allergies: "",
+	dietPrefs: "",
+	time: ""
+}
+
 var result = response.recipes;
 
 console.log(result);
@@ -431,22 +450,34 @@ console.log("title: " + result[0].attribution.text);
 console.log("link: " + result[0].attribution.url);
 console.log("official attribution: " + result[0].attribution.url);
 
+
+
 $('#submit-search').on('click', function(event){
 	event.preventDefault();
-	var ingredients = $('#ingredients-input').val().trim();
-	var allergies = [];
-	var dietPrefs = [];
-	var time = $('.time-input').val();
-	pullCheckboxValues(allergies,".allergyList");
-	pullCheckboxValues(dietPrefs,".dietPrefs");
-	console.log("allergies " + allergies, "dietPrefs " +dietPrefs);
-	console.log("ingredients " + ingredients);
-	console.log("time " + time);
+	userState.ingredients = $('#ingredients-input').val().trim();
+	userState.allergies = [];
+	userState.dietPrefs = [];
+	userState.time = $('.time-input').val();
+	pullCheckboxValues(userState.allergies,".allergyList");
+	pullCheckboxValues(userState.dietPrefs,".dietPrefs");
+	console.log("allergies " + userState.allergies, "dietPrefs " + userState.dietPrefs);
+	console.log("ingredients " + userState.ingredients);
+	console.log("time " + userState.time);
 });
 
 function pullCheckboxValues(array, formgroup){
 	$(formgroup).find($('input[type="checkbox"]:checked')).each(function(){
 		array.push($(this).val());
+		database.ref().set({
+			allergiesList: userState.allergies
+		});
 	});
 }
+
+
+
+  // Initialize Firebase
+  
+
+   
 
