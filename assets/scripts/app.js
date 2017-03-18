@@ -57,12 +57,25 @@ $('#submit-search').on('click', function(event){
 	  method: 'GET',
 	}).done(function(response) {
 	  console.log(response);
+	  loadHTML(response);
 	}).fail(function(err) {
 	  throw err;
 	});
 
 });
 
+	function loadHTML (response) {
+		var imageURL = response.hits[0].recipe.image;
+		var title = response.hits[0].recipe.label;
+		var returnURL = response.hits[0].recipe.url;
+		console.log (imageURL + title + returnURL);
+		$(".results").append("<img class ='recipePhoto' src='" + imageURL + "'/>");
+		$(".results").append("<h2>" + title + "</h2>");
+		// $(".results").append("<h2>" + title + "</h2>");
+	}
+	
+
+	
 function pullCheckboxValues(array, formgroup){
 	$(formgroup).find($('input[type="checkbox"]:checked')).each(function(){
 		array.push($(this).val());
