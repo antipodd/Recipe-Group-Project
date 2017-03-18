@@ -21,6 +21,8 @@ var userState = {
 
 $('#submit-search').on('click', function(event){
 	event.preventDefault();
+	console.log("test");
+
 	userState.ingredients = $('#ingredients-input').val().trim();
 	userState.allergies = [];
 	userState.dietPrefs = [];
