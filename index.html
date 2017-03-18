@@ -3,10 +3,25 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Document</title>
-		<!-- Link to bootstrap -->
-		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<!-- Link to CSS -->
-		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+		<!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  
+    <!-- Javascript -->
+    <script src="assets/javascript/app.js"></script>
+    
+    <!-- CSS Reset -->
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    
+    
+    <!-- Bootstrap CDN-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <!-- CSS -->
+    <link type="text/css" rel="stylesheet" href="assets/css/style.css"/>
+
+    <!-- Firebase Reference -->
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
 	</head>
 	<body>
 
@@ -20,48 +35,21 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <!-- <a class="navbar-brand" href="#">Brand</a> -->
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
+        <li class="active"><a href="#">Saved Recipes<span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Donate your food</a></li>
+        <li class="active"><a href="#">Volunteer<span class="sr-only">(current)</span></a></li>
       </ul>
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
+      
 <ul class="nav navbar-nav navbar-right">
         <li><p class="navbar-text">Already have an account?</p></li>
         <li class="dropdown">
-
-        <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-  </div>
-</div>
- <!--          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
       <ul id="login-dp" class="dropdown-menu">
         <li>
            <div class="row">
@@ -97,7 +85,7 @@
               </div>
            </div>
         </li>
-      </ul> -->
+      </ul>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -108,7 +96,7 @@
 
 		<div class="container">
     <div class="jumbotron">
-      <h1 class="text-center">Best B4</h1>
+      <h1 class="text-center title">BEST B4</h1>
       <h3 class="text-center">"Using your ingredients"</h3>
     </div>
 
@@ -124,68 +112,67 @@
                   					<label for="ingredients">Ingredients</label>
                   					<input class="form-control" id="ingredients-input" type="text">
                 				</div>
+                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Advanced Options</button>
+                        <div id="demo" class="collapse">
+    
+  
                 				<div class="form-group allergyList">
                 					<label for="allergies">Allergies</label>
                 					<div class="checkbox">
-      									<label><input type="checkbox" value="Dairy-Free">Dairy</label>
+      									<label><input type="checkbox" value="dairy-free">Dairy</label>
     								</div>
     								<div class="checkbox">
-      								<label><input type="checkbox" value="Egg-Free">Egg</label>
+      								<label><input type="checkbox" value="egg-free">Egg</label>
     								</div>
     								<div class="checkbox">
-      									<label><input type="checkbox" value="Gluten-Free">Gluten</label>
+      									<label><input type="checkbox" value="gluten-free">Gluten</label>
     								</div>
     								<div class="checkbox">
-      									<label><input type="checkbox" value="Peanut-Free">Peanut</label>
+      									<label><input type="checkbox" value="peanut-free">Peanut</label>
     								</div>
     								<div class="checkbox">
-      									<label><input type="checkbox" value="Seafood-Free">Seafood</label>
+      									<label><input type="checkbox" value="fish-free shellfish-free crustacean-free">Seafood</label>
     								</div>
     								<div class="checkbox">
-      									<label><input type="checkbox" value="Sesame-Free">Sesame</label>
+      									<label><input type="checkbox" value="sesame-free">Sesame</label>
     								</div>
 	    							<div class="checkbox">
-	      								<label><input type="checkbox" value="Soy-Free">Soy</label>
+	      								<label><input type="checkbox" value="soy-free">Soy</label>
 	    							</div>
 	    							<div class="checkbox">
-	      								<label><input type="checkbox" value="Sulfite-Free">Sulfite</label>
+	      								<label><input type="checkbox" value="tree-nut-free">Tree Nut</label>
 	    							</div>
 	    							<div class="checkbox">
-	      								<label><input type="checkbox" value="Tree-Nut-Free">Tree Nut</label>
-	    							</div>
-	    							<div class="checkbox">
-	      								<label><input type="checkbox" value="Wheat-Free">Wheat</label>
+	      								<label><input type="checkbox" value="wheat-free">Wheat</label>
 	    							</div>
 	    						</div>
 	    						<div class="form-group dietPrefs">
                 					<label for="preferences">Dietary Preferences</label>
                 					<div class="checkbox">
-      									<label><input type="checkbox" value="Lacto vegetarian">Lacto vegetarian</label>
+      									<label><input type="checkbox" value="kosher">Kosher</label>
     								</div>
     								<div class="checkbox">
-      								<label><input type="checkbox" value="Ovo vegetarian">Ovo vegetarian</label>
+      									<label><input type="checkbox" value="pescetarian">Pescetarian</label>
     								</div>
     								<div class="checkbox">
-      									<label><input type="checkbox" value="Pescetarian">Pescetarian</label>
+      									<label><input type="checkbox" value="vegan">Vegan</label>
     								</div>
     								<div class="checkbox">
-      									<label><input type="checkbox" value="Vegan">Vegan</label>
-    								</div>
-    								<div class="checkbox">
-      									<label><input type="checkbox" value="Vegetarian">Vegetarian</label>
+      									<label><input type="checkbox" value="vegetarian">Vegetarian</label>
     								</div>
    	    						</div>
-   	    						<div class="form-group">
-   	    							<label for="sel1">Max Preparation Time</label>
-      								<select class="form-control time-input" id="sel1">
-        								<option>Choose time</option>
-        								<option>15 minutes</option>
-									    <option>30 minutes</option>
-									    <option>60 minutes</option>
-									    <option>90 minutes</option>
-									    <option>2 hours</option>
-									</select>
-								</div>
+   	    						<!-- <div class="form-group">
+                      <label for="sel1">Max Preparation Time</label>
+                                          <select class="form-control time-input" id="sel1">
+                                            <option>Choose time</option>
+                                            <option>15 minutes</option>
+                                          <option>30 minutes</option>
+                                          <option>60 minutes</option>
+                                          <option>90 minutes</option>
+                                          <option>2 hours</option>
+                                      </select>
+                                    </div> -->
+                </div>
                 				<button class="btn btn-primary" id="submit-search" type="submit">Submit</button>
               				</form>
             			</div>
@@ -210,9 +197,9 @@
 	
 		
 	<!-- Link to JQuery and javascript file-->
-	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
-	<script src="assets/scripts/app.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"</script>
+	<!-- <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+  <script src="assets/scripts/app.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"</script> -->
 
 	</body>
 </html>
