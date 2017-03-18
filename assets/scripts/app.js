@@ -27,23 +27,31 @@ $('#submit-search').on('click', function(event){
 	userState.time = $('.time-input').val();
 	pullCheckboxValues(userState.allergies,".allergyList");
 	pullCheckboxValues(userState.dietPrefs,".dietPrefs");
+	
 	console.log("allergies " + userState.allergies, "dietPrefs " + userState.dietPrefs);
 	console.log("ingredients " + userState.ingredients);
 	console.log("time " + userState.time);
 
+	var allergiesQuery = "";
+	var dietPrefsQuery = "";
 
-	var url = "https://api.edamam.com/search&app_key=2a8d5e5d4600120a11ab487124231f6c&q=" + ingredients + diet;
+	for(i = 0; i < userState.allergies.length; i++){
+		allergiesQuery += "&health=" + userState.allergies[i]
+		console.log(allergiesQuery);
+	}
+
+	for(i = 0; i < userState.dietPrefs.length; i++){
+		dietPrefsQuery += "&diet=" + userState.dietPrefs[i]
+		console.log(dietPrefsQuery);
+	}
+
+
+	var url = "https://api.edamam.com/search?q=" + userState.ingredients + "&app_idbcb68bd8" + "&app_key=2a8d5e5d4600120a11ab487124231f6c" + dietPrefsQuery + allergiesQuery;
+	console.log(url);
 	
 
-	url += '?' + $.param({
-	  'app_key': "2a8d5e5d4600120a11ab487124231f6c",
-	   'q': ingredients,
-	   'diet': dietPrefs,
-	   'health': allergies
-	});
-
 	$.ajax({
-	  url: "https://api.edamam.com/search?app_key=2a8d5e5d4600120a11ab487124231f6c&q=chicken%20basil&health=peanut-free&health=gluten-free",
+	  url: url,
 	  method: 'GET',
 	}).done(function(response) {
 	  console.log(response);
