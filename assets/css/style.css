@@ -22,3 +22,7 @@ body {
 /* .panel-default .panel-heading {
 	background: transparent;
 } */
+
+.results-section {
+	display: none;
+}
