@@ -16,10 +16,15 @@ var userState = {
 	ingredients: "",
 	allergies: "",
 	dietPrefs: "",
-	time: ""
+	time: "",
+	from: 0,
+	to: 9
 }
 
 $('#submit-search').on('click', function(event){
+	$(".results").empty();
+	counter = 0;
+	
 	event.preventDefault();
 	console.log("test");
 
@@ -48,7 +53,7 @@ $('#submit-search').on('click', function(event){
 	}
 
 
-	var url = "https://api.edamam.com/search?q=" + userState.ingredients + "&app_idbcb68bd8" + "&app_key=2a8d5e5d4600120a11ab487124231f6c" + dietPrefsQuery + allergiesQuery;
+	var url = "https://api.edamam.com/search?q=" + userState.ingredients + "&app_idbcb68bd8" + "&app_key=2a8d5e5d4600120a11ab487124231f6c" + "&from=" + userState.from + "&to=" + userState.to + dietPrefsQuery + allergiesQuery;
 	console.log(url);
 	
 
@@ -71,7 +76,7 @@ $('#submit-search').on('click', function(event){
 			if (i === 0 || i%3 === 0) {
 				var newRow = $("<div class = row>");
 				var newColumn = $("<div>");
-				newColumn.addClass("col-xs-12 col-sm-6 col-md-4 col-lg-4")
+				newColumn.addClass("col-xs-12 col-sm-4 col-md-4 col-lg-4");
 				var imageURL = response.hits[i].recipe.image;
 				var title = response.hits[i].recipe.label;
 				var returnURL = response.hits[i].recipe.url;
@@ -84,7 +89,7 @@ $('#submit-search').on('click', function(event){
 				$(".results").append(newRow);
 			} else {
 				var newColumn = $("<div>");
-				newColumn.addClass("col-xs-12 col-sm-6 col-md-4 col-lg-4")
+				newColumn.addClass("col-xs-12 col-sm-4 col-md-4 col-lg-4");
 				var imageURL = response.hits[i].recipe.image;
 				var title = response.hits[i].recipe.label;
 				var returnURL = response.hits[i].recipe.url;
@@ -96,6 +101,16 @@ $('#submit-search').on('click', function(event){
 				$(".results .row:last-child").append(newColumn);
 			}
 		}
+		var newLoadRow = $("<div class = row>");
+		var newLoadColumn = $("<div>");
+		newLoadColumn.addClass("col-xs-12 col-sm-4 col-md-4 col-lg-4");
+		var moreResultsButton = $("<button>");
+		moreResultsButton.addClass("btn btn-primary");
+		moreResultsButton.attr("id", "load-more-results");
+		moreResultsButton.text("Show More Results");
+		newLoadColumn.append(moreResultsButton);
+		newLoadRow.append(newLoadColumn);
+		$(".results").append(newLoadRow);
 	}
 	
 
@@ -117,10 +132,32 @@ $(".results").on("click", "#recipe-result", function() {
 	if (checked) {
 		$(this).siblings("span").html("Recipe Saved!");
 		//add value to firebase
-  } else {
+  	} else {
     $(this).siblings("span").html("Save Recipe");
     //remove value from firebase
-  }
+  	}
+});
+
+$(".results").on('click', "#load-more-results", function(){
+	$(".results .row:last-child").remove();
+	console.log("more please");
+	userState.from += 9;
+	userState.to += 9;
+	console.log(counter)
+	var url = "https://api.edamam.com/search?q=" + userState.ingredients + "&app_idbcb68bd8" + "&app_key=2a8d5e5d4600120a11ab487124231f6c" + "&from=" + userState.from + "&to=" + userState.to + userState.allergies + userState.dietPrefs;
+	console.log(url);
+	
+
+	$.ajax({
+	  url: url,
+	  method: 'GET',
+	}).done(function(response) {
+	  console.log(response);
+	  loadHTML(response);
+	}).fail(function(err) {
+	  throw err;
+	});
+
 });
 
   // Initialize Firebase
