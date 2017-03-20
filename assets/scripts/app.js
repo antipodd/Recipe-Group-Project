@@ -80,7 +80,7 @@ $('#submit-search').on('click', function(event){
 				var imageURL = response.hits[i].recipe.image;
 				var title = response.hits[i].recipe.label;
 				var returnURL = response.hits[i].recipe.url;
-				newColumn.append("<a href='" + returnURL + "''>" + "<img class ='recipePhoto' src='" + imageURL + "'/>" + "<h2>" + title + "</h2>" + "</a>" );
+				newColumn.append("<a href='" + returnURL + "' target='_blank'>" + "<img class ='recipePhoto' src='" + imageURL + "'/>" + "<h2>" + title + "</h2>" + "</a>" );
 				var newCheckbox = $("<div>");
 				newCheckbox.addClass("checkbox");
 				newCheckbox.append("<label><input type=\"checkbox\" id=\"recipe-result\" value=" + response.hits[i].recipe.uri + "><span>Save Recipe</span></label>");
@@ -93,7 +93,7 @@ $('#submit-search').on('click', function(event){
 				var imageURL = response.hits[i].recipe.image;
 				var title = response.hits[i].recipe.label;
 				var returnURL = response.hits[i].recipe.url;
-				newColumn.append("<a href='" + returnURL + "''>" + "<img class ='recipePhoto' src='" + imageURL + "'/>" + "<h2>" + title + "</h2>" + "</a>" );
+				newColumn.append("<a href='" + returnURL + "' target='_blank'>" + "<img class ='recipePhoto' src='" + imageURL + "'/>" + "<h2>" + title + "</h2>" + "</a>" );
 				var newCheckbox = $("<div>");
 				newCheckbox.addClass("checkbox recipe-result");
 				newCheckbox.append("<label><input type=\"checkbox\" id=\"recipe-result\" value=" + response.hits[i].recipe.uri + "><span>Save Recipe</span></label>");
