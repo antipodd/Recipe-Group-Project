@@ -131,18 +131,22 @@ $(".results").on("click", "#recipe-result", function() {
 	console.log(value)
 	var checked = this.checked;
 	console.log(checked);
+	var pushKey;
 	if (checked) {
 		$(this).siblings("span").html("Recipe Saved!");
 		//add value to firebase
-		savedRecipes.push({
-        recipe: value
-        });
+		var newPush = savedRecipes.push({recipe: value});
+		pushKey = newPush.key;
+		console.log(pushKey);
+		$(this).attr("key", pushKey);
+		console.log($(this).attr("key"))
+				
   	} else {
     	$(this).siblings("span").html("Save Recipe");
     	//remove value from firebase
-    	savedRecipes.update({
-        value: null
-      });
+    	var removeKey = $(this).attr("key");
+    	console.log(removeKey);
+    	savedRecipes.child(removeKey).remove();
   	}
 });
 
