@@ -12,6 +12,8 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
+var savedRecipes = database.ref("Saved Recipes");
+
 var userState = {
 	ingredients: "",
 	allergies: "",
@@ -48,7 +50,7 @@ $('#submit-search').on('click', function(event){
 	}
 
 	for(i = 0; i < userState.dietPrefs.length; i++){
-		dietPrefsQuery += "&diet=" + userState.dietPrefs[i]
+		dietPrefsQuery += "&health=" + userState.dietPrefs[i]
 		console.log(dietPrefsQuery);
 	}
 
@@ -132,9 +134,15 @@ $(".results").on("click", "#recipe-result", function() {
 	if (checked) {
 		$(this).siblings("span").html("Recipe Saved!");
 		//add value to firebase
+		savedRecipes.push({
+        recipe: value
+        });
   	} else {
-    $(this).siblings("span").html("Save Recipe");
-    //remove value from firebase
+    	$(this).siblings("span").html("Save Recipe");
+    	//remove value from firebase
+    	savedRecipes.update({
+        value: null
+      });
   	}
 });
 
