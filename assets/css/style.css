@@ -23,7 +23,12 @@ body {
 	background: transparent;
 } */
 
-.results-section {
+.results-section, .end-message{
 	display: none;
 }
+
+#map {
+  height: 500px;
+}
+
 
