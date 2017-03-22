@@ -2,15 +2,14 @@
 	<html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>Document</title>
+		<title>Best B4</title>
+
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
 		<!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  
-    <!-- Javascript -->
-    <script src="assets/javascript/app.js"></script>
     
     <!-- CSS Reset -->
-    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/reset.css"> -->
     
     
     <!-- Bootstrap CDN-->
@@ -20,8 +19,7 @@
     <!-- CSS -->
     <link type="text/css" rel="stylesheet" href="assets/css/style.css"/>
 
-    <!-- Firebase Reference -->
-    <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
+    
 	</head>
 	<body>
 
@@ -45,6 +43,7 @@
         <li><a href="statement.html">Our Mission<span class="sr-only">(current)</span></a></li>
         <li><a href="donate.html">Donate your food</a></li>
         <li><a href="volunteer.html">Volunteer<span class="sr-only">(current)</span></a></li>
+        <li><a href="saved-recipes.html">Saved Recipes<span class="sr-only">(current)</span></a></li>
       </ul>
       
 <ul class="nav navbar-nav navbar-right">
@@ -132,6 +131,7 @@
       									<label><input type="checkbox" value="peanut-free">Peanut</label>
     								</div>
     								<div class="checkbox">
+
       									<label><input type="checkbox" value="fish-free shellfish-free crustacean-free">Seafood</label>
     								</div>
     								<div class="checkbox">
@@ -183,11 +183,13 @@
 		
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="panel panel-default">
+				<div class="panel panel-default results-section">
             		<div class="panel-heading">
               			<h3 class="panel-title">Results</h3>
             		</div>
             		<div class="panel-body">
+                  <div class="results"></div>
+                  <div class="end-message"><h3>Haven't spotted the perfect recipe? Consider donating at your local <a href="donate.html">food pantry</a> or visit <a href="restaurant.html">these nearby restaurants</a> instead.</h3></div>
             		</div>
             	</div>
             </div>
@@ -195,7 +197,10 @@
     </div> <!--Close container -->	
 
 
-	
+	<!-- Firebase Reference -->
+    <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
+    <!-- Javascript -->
+    <script src="assets/scripts/app.js"></script>
 		
 	
 	</body>

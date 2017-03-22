@@ -22,3 +22,13 @@ body {
 /* .panel-default .panel-heading {
 	background: transparent;
 } */
+
+.results-section, .end-message{
+	display: none;
+}
+
+#map {
+  height: 500px;
+}
+
+

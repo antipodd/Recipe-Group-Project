@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Donate your food</title>
+	<title>Restaurants</title>
 
 <!-- Bootstrap CDN-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -86,17 +86,17 @@
 
 	<div class="container">
     <div class="jumbotron">
-      <h1 class="text-center title">DONATE</h1>
-      <h3 class="text-center">"Using your ingredients"</h3>
+      <h1 class="text-center title">Restaurants Nearby</h1>
+      <h3 class="text-center">Because cooking ain't easy</h3>
     </div>
 
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 donate-text">
         	<div class="panel panel-default" style="opacity: 1">
 				      <div class="panel-body">
-              		<h4>Don't feel like cooking?  Find a location to donate your non-perishable foods before their best before date!
+              		<h4>Don't feel like cooking?  Try these nearby restaurants instead!
               		</h4>
-                  <div style="height: 500px;" id="map"></div>
+                  <div id="map"></div>
     <script>
       // Note: This example requires that you consent to location sharing when
       // prompted by your browser. If you see the error "The Geolocation service
@@ -125,7 +125,7 @@
             var request = {
               location: pos,
               radius: '5',
-              query: 'food pantry'
+              query: 'restaurant'
             };
 
             var infowindow = new google.maps.InfoWindow();
@@ -157,27 +157,6 @@
               });
 
             }
-
-            // function createMarker(place) {
-            //   var placeLoc = place.geometry.location;
-            //   var marker = new google.maps.Marker({
-            //     map: map,
-            //     position: place.geometry.location
-            //   });
-
-            //   google.maps.event.addListener(marker, 'click', function() {
-                
-            //     service.getDetails(place, function(result, status) {
-            //       if (status !== google.maps.places.PlacesServiceStatus.OK) {
-            //         console.error(status);
-            //         return;
-            //       }
-            //       infoWindow.setContent(place.name);
-            //       infoWindow.open(map, this);
-            //     });
-            //   });
-
-            // }
 
 
           }, function() {
