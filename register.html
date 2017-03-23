@@ -1,20 +1,29 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Restaurants</title>
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
-<!-- Bootstrap CDN-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-   
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Best B4</title>
 
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+		<!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    
+    <!-- CSS Reset -->
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/reset.css"> -->
+    
+    
+    <!-- Bootstrap CDN-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
     <!-- CSS -->
     <link type="text/css" rel="stylesheet" href="assets/css/style.css"/>
 
-</head>
-<body>
+    
+	</head>
+	<body>
 
-<nav class="navbar navbar-default">
+  <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -30,16 +39,16 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-      <li><a href="index.html">Home<span class="sr-only">(current)</span></a></li>
+      <li class><a href="index.html">Home<span class="sr-only">(current)</span></a></li>
         <li><a href="statement.html">Our Mission<span class="sr-only">(current)</span></a></li>
-        <li class="active"><a href="donate.html">Donate your food</a></li>
+        <li><a href="donate.html">Donate your food</a></li>
         <li><a href="volunteer.html">Volunteer<span class="sr-only">(current)</span></a></li>
         <li><a href="saved-recipes.html">Saved Recipes<span class="sr-only">(current)</span></a></li>
       </ul>
       
 <ul class="nav navbar-nav navbar-right">
-        <li><p class="navbar-text">Already have an account?</p></li>
-        <li class="dropdown">
+        <li class="active"><a href="login.html">Login<span class="sr-only">(current)</span></a></li>
+        <!-- <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
       <ul id="login-dp" class="dropdown-menu">
         <li>
@@ -78,36 +87,58 @@
         </li>
       </ul>
         </li>
-      </ul>
+      </ul> -->
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
+ 
 
-	<div class="container">
-    <div class="jumbotron">
-      <h1 class="text-center title">Restaurants Nearby</h1>
-      <h3 class="text-center">Because cooking ain't easy</h3>
-    </div>
-
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 donate-text">
-        	<div class="panel panel-default" style="opacity: 1">
-				      <div class="panel-body">
-              		<h4>Don't feel like cooking?  Try these nearby restaurants instead!
-              		</h4>
-                  <div id="map"></div>
+		<div class="container">
+      <div class="jumbotron">
+        <h1 class="text-center title">BEST B4</h1>
+        <h3 class="text-center">"Using your ingredients"</h3>
+      </div>
+        <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">New User Registration</h3>
+                </div>
+                <div class="panel-body results">
+                  <div class="row">
+                  <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                    <div class="form-group">
+                       <label class="sr-only" for="name">Name</label>
+                       <input type="name" class="form-control" id="name" placeholder="Name" required>
+                    </div>
+                    <div class="form-group">
+                       <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                       <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+                    </div>
+                    <div class="form-group">
+                       <label class="sr-only" for="exampleInputPassword2">Password</label>
+                       <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                       <button class="btn btn-primary btn-block register-submit">Register</button>
+                    </div>
+  
+                 </form>
               </div>
-          </div>
-        </div>
-    </div>
+           </div>
+                </div>
+              </div>
+            </div>
+        </div> <!-- Close results --> 
+    </div> <!--Close container -->	
 
-    
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZkQInKJmve78LzM1syN5HNXNMZRjvZWg&libraries=places&callback=initMap"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="assets/scripts/map.js"></script>          
-
-</body>
+	<!-- Firebase Reference -->
+    <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
+    <!-- Javascript -->
+     <script src="assets/scripts/login.js"></script>
+		
+	
+	</body>
 </html>

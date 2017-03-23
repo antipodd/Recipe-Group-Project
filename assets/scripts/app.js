@@ -1,5 +1,3 @@
-
-
 var config = {
     apiKey: "AIzaSyAh--04dzUCt6Iph2w8xn-cHUMx-Yfj6eM",
     authDomain: "nutrition-36cb1.firebaseapp.com",
@@ -202,7 +200,6 @@ $(".results").on('click', "#load-more-results", function(){
 	console.log("more please");
 	userState.from += 9;
 	userState.to += 9;
-	
 	var url = "https://api.edamam.com/search?q=" + userState.ingredients + "&app_idbcb68bd8" + "&app_key=2a8d5e5d4600120a11ab487124231f6c" + "&from=" + userState.from + "&to=" + userState.to + userState.allergies + userState.dietPrefs;
 	console.log(url);
 	
@@ -219,7 +216,6 @@ $(".results").on('click', "#load-more-results", function(){
 
 });
 
-
 savedRecipes.on("value", function(snapshot) {
 	var savedKeys = Object.keys(snapshot.val());
 	console.log(Object.keys(snapshot.val()))
@@ -231,4 +227,3 @@ savedRecipes.on("value", function(snapshot) {
 });
 
    
-
