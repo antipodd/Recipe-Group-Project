@@ -1,5 +1,3 @@
-
-
 var config = {
     apiKey: "AIzaSyAh--04dzUCt6Iph2w8xn-cHUMx-Yfj6eM",
     authDomain: "nutrition-36cb1.firebaseapp.com",
@@ -177,8 +175,3 @@ $(".results").on('click', "#load-more-results", function(){
 	});
 
 });
-
-  
-
-   
-
