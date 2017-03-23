@@ -12,7 +12,7 @@ var database = firebase.database();
 
 var savedRecipes = database.ref("Saved Recipes");
 
-var savedURI;
+var savedURI = [];
 
 var userState = {
 	ingredients: "",
@@ -154,7 +154,7 @@ $('#submit-search').on('click', function(event){
 function pullCheckboxValues(array, formgroup){
 	$(formgroup).find($('input[type="checkbox"]:checked')).each(function(){
 		array.push($(this).val());
-		database.ref().set({
+		database.ref("Allergies").set({
 			allergiesList: userState.allergies
 		});
 	});
