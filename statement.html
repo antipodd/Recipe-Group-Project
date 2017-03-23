@@ -1,1 +1,187 @@
-<li><a href="saved-recipes.html">Saved Recipes<span class="sr-only">(current)</span></a></li>
+
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  
+    <!-- Javascript -->
+    <script src="assets/javascript/app.js"></script>
+    
+    <!-- CSS Reset -->
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    
+    
+    <!-- Bootstrap CDN-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <!-- CSS -->
+    <link type="text/css" rel="stylesheet" href="assets/css/style.css"/>
+
+    <!-- Firebase Reference -->
+    <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
+	</head>
+	<body>
+
+  <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <!-- <a class="navbar-brand" href="#">Brand</a> -->
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      <li><a href="index.html">Home<span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="statement.html">Our Mission<span class="sr-only">(current)</span></a></li>
+        <li><a href="donate.html">Donate your food</a></li>
+        <li><a href="volunteer.html">Volunteer<span class="sr-only">(current)</span></a></li>
+        <li><a href="saved-recipes.html">Saved Recipes<span class="sr-only">(current)</span></a></li>
+      </ul>
+      
+<ul class="nav navbar-nav navbar-right">
+        <li><p class="navbar-text">Already have an account?</p></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+      <ul id="login-dp" class="dropdown-menu">
+        <li>
+           <div class="row">
+              <div class="col-md-12">
+                Login via
+                <div class="social-buttons">
+                  <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
+                  <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
+                </div>
+                                or
+                 <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                    <div class="form-group">
+                       <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                       <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+                    </div>
+                    <div class="form-group">
+                       <label class="sr-only" for="exampleInputPassword2">Password</label>
+                       <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                                             <div class="help-block text-right"><a href="">Forget the password ?</a></div>
+                    </div>
+                    <div class="form-group">
+                       <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                    </div>
+                    <div class="checkbox">
+                       <label>
+                       <input type="checkbox"> keep me logged-in
+                       </label>
+                    </div>
+                 </form>
+              </div>
+              <div class="bottom text-center">
+                New here ? <a href="#"><b>Join Us</b></a>
+              </div>
+           </div>
+        </li>
+      </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+ 
+
+		<div class="container">
+
+    <div class="jumbotron">
+      <h1 class="text-center title">Stop the Waste</h1>
+      
+    </div>
+
+
+    <!-- Begin carousel -->
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+    <li data-target="#myCarousel" data-slide-to="3"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <img class="img-responsive center-block"  src="assets/images/wasted-food.jpg" alt="wasted-food" height="500" width="400">
+    </div>
+
+    <div class="item">
+      <img class="img-responsive center-block" src="assets/images/wasted-foodII.jpg" alt="wasted-foodII" height="500" width="400">
+    </div>
+
+    <div class="item">
+      <img class="img-responsive center-block" src="assets/images/wasted-foodIII.jpg" alt="wasted-foodIII" height="500" width="400">
+    </div>
+
+    <div class="item">
+      <img class="img-responsive center-block" src="assets/images/wasted-foodIV.jpg" alt="wasted-foodIV" height="500" width="400">
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+    <!-- end carousel  -->
+
+
+			<div class="row">
+        		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+          			<div class="panel panel-default">
+            			
+            			<div class="panel-body">
+                  <p>About one third of the food produced every year for human consumption is wasted. That’s 1.3 billion tons.  In creating Best B4, our mission was to help people use the food they have on hand before it expires.  You can search by ingredients and further filter on allergies or diet. </p>
+
+                  <p>If you still have food left over after using our recipes, you can use our find a local food bank.  select "Donate your Food." You can also link to local volunteer opportunities.  </p>
+
+                  <p>Learn more about food waste and what you can do:
+                  <br>
+
+                    <a href="http://savethefood.com/">Save the Food</a>
+                    <br>
+                    <a href="http://www.feedingamerica.org/about-us/how-we-work/securing-meals/reducing-food-waste.html?referrer=https://www.google.com/">Food Waste in America</a>
+                     <br>
+                    <a href="https://www.epa.gov/recycle/reducing-wasted-food-home">Reducing Food Waste at Home</a>
+
+                  </div>
+              				
+    								
+    								
+   	    		
+      </div>  
+		
+		
+		
+    </div> <!--Close container -->	
+
+
+	
+		
+	
+	</body>
+</html>
+

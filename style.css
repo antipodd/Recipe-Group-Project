@@ -1,0 +1,9 @@
+@font-face {
+   font-family: "Best B4";
+   src: url("../fonts/futura-extra-black-normal.ttf");
+}
+
+.title {
+	font-family: "Best B4";
+}
+
