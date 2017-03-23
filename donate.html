@@ -59,19 +59,25 @@
                     <div class="form-group">
                        <label class="sr-only" for="exampleInputPassword2">Password</label>
                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
-                                             <div class="help-block text-right"><a href="">Forget the password ?</a></div>
+                                             <div class="help-block text-right"><a href="">Forgot your password?</a></div>
                     </div>
                     <div class="form-group">
-                       <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                       <button type="submit" class="btn btn-primary btn-block login-submit">Log in</button>
                     </div>
+                    <div class="form-group">
+                       <button type="submit" class="btn btn-primary btn-block register-submit">Register</button>
+                    </div>
+                    <div class="form-group">
+                           <button type="submit" class="btn btn-primary hide logout">Log Out</button>
+                        </div>
                     <div class="checkbox">
                        <label>
-                       <input type="checkbox"> keep me logged-in
+                       <input type="checkbox"> Keep me logged-in
                        </label>
                     </div>
                  </form>
               </div>
-              <div class="bottom text-center">
+              <div class="bottom text-center join">
                 New here ? <a href="#"><b>Join Us</b></a>
               </div>
            </div>
@@ -204,8 +210,13 @@
     
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
+<!-- Firebase Reference -->
+  <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZkQInKJmve78LzM1syN5HNXNMZRjvZWg&libraries=places&callback=initMap"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>             
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
+  <script src="assets/scripts/maps.js"></script>  
+  <script src="assets/scripts/login.js"></script> 
+
 
 </body>
 </html>

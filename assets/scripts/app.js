@@ -162,7 +162,7 @@ $(".results").on('click', "#load-more-results", function(){
 	userState.from += 9;
 	userState.to += 9;
 	console.log(counter)
-	var url = "https://api.edamam.com/search?q=" + userState.ingredients + "&app_idbcb68bd8" + "&app_key=2a8d5e5d4600120a11ab487124231f6c" + "&from=" + userState.from + "&to=" + userState.to + userState.allergies + userState.dietPrefs;
+	var url = "https://api.edamam.com/search ?q=" + userState.ingredients + "&app_idbcb68bd8" + "&app_key=2a8d5e5d4600120a11ab487124231f6c" + "&from=" + userState.from + "&to=" + userState.to + userState.allergies + userState.dietPrefs;
 	console.log(url);
 	
 
