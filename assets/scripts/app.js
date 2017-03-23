@@ -14,6 +14,8 @@ var database = firebase.database();
 
 var savedRecipes = database.ref("Saved Recipes");
 
+var savedURI;
+
 var userState = {
 	ingredients: "",
 	allergies: "",
@@ -27,7 +29,7 @@ $('#submit-search').on('click', function(event){
 	
 	event.preventDefault();
 	$(".results").empty();
-	counter = 0;
+	//counter = 0;
 
 	if( $('#ingredients-input').val() === ""){
 		$(this).after("<p class=\"invalid-input\">Please enter a valid search value</p>");
@@ -75,6 +77,7 @@ $('#submit-search').on('click', function(event){
 		$(".results-section").removeClass("results-section");
 
 	}
+	$('#ingredients-input').val("");
 
 });
 
@@ -83,34 +86,61 @@ $('#submit-search').on('click', function(event){
 			if (i === 0 || i%3 === 0) {
 				var newRow = $("<div class = row>");
 				var newColumn = $("<div>");
-				newColumn.addClass("col-xs-12 col-sm-4 col-md-4 col-lg-4");
+				newColumn.addClass("col-xs-4 col-sm-4 col-md-4 col-lg-4");
 				var imageURL = response.hits[i].recipe.image;
 				var title = response.hits[i].recipe.label;
 				var returnURL = response.hits[i].recipe.url;
 				newColumn.append("<a href='" + returnURL + "' target='_blank'>" + "<img class ='recipePhoto' src='" + imageURL + "'/>" + "<h2>" + title + "</h2>" + "</a>" );
-				var newCheckbox = $("<div>");
-				newCheckbox.addClass("checkbox");
-				newCheckbox.append("<label><input type=\"checkbox\" id=\"recipe-result\" value=" + response.hits[i].recipe.uri + "><span>Save Recipe</span></label>");
-				newColumn.append(newCheckbox);
+				var counter = 0;
+				for (var j = 0; j < savedURI.length; j ++) {
+					if (savedURI[j] === response.hits[i].recipe.uri) {
+						counter++;
+					}
+				}
+				console.log(counter);
+				if (counter !== 0) {
+					var newTextDiv = $("<div>");
+					newTextDiv.text("Recipe Saved!");
+					newColumn.append(newTextDiv);
+				} else {
+					var newCheckbox = $("<div>");
+					newCheckbox.addClass("checkbox");
+					newCheckbox.append("<label><input type=\"checkbox\" id=\"recipe-result\" value=" + response.hits[i].recipe.uri + "><span>Save Recipe</span></label>");
+					newColumn.append(newCheckbox);
+				}
+								
 				newRow.append(newColumn);
 				$(".results").append(newRow);
 			} else {
 				var newColumn = $("<div>");
-				newColumn.addClass("col-xs-12 col-sm-4 col-md-4 col-lg-4");
+				newColumn.addClass("col-xs-4 col-sm-4 col-md-4 col-lg-4");
 				var imageURL = response.hits[i].recipe.image;
 				var title = response.hits[i].recipe.label;
 				var returnURL = response.hits[i].recipe.url;
 				newColumn.append("<a href='" + returnURL + "' target='_blank'>" + "<img class ='recipePhoto' src='" + imageURL + "'/>" + "<h2>" + title + "</h2>" + "</a>" );
-				var newCheckbox = $("<div>");
-				newCheckbox.addClass("checkbox recipe-result");
-				newCheckbox.append("<label><input type=\"checkbox\" id=\"recipe-result\" value=" + response.hits[i].recipe.uri + "><span>Save Recipe</span></label>");
-				newColumn.append(newCheckbox);
+				var counter = 0;
+				for (var j = 0; j < savedURI.length; j ++) {
+					if (savedURI[j] === response.hits[i].recipe.uri) {
+						counter++;
+					}
+				}
+				console.log(counter);
+				if (counter !== 0) {
+					var newTextDiv = $("<div>");
+					newTextDiv.text("Recipe Saved!");
+					newColumn.append(newTextDiv);
+				} else {
+					var newCheckbox = $("<div>");
+					newCheckbox.addClass("checkbox");
+					newCheckbox.append("<label><input type=\"checkbox\" id=\"recipe-result\" value=" + response.hits[i].recipe.uri + "><span>Save Recipe</span></label>");
+					newColumn.append(newCheckbox);
+				}	
 				$(".results .row:last-child").append(newColumn);
 			}
 		}
 		var newLoadRow = $("<div class = row>");
 		var newLoadColumn = $("<div>");
-		newLoadColumn.addClass("col-xs-12 col-sm-4 col-md-4 col-lg-4");
+		newLoadColumn.addClass("col-xs-4 col-sm-4 col-md-4 col-lg-4");
 		var moreResultsButton = $("<button>");
 		moreResultsButton.addClass("btn btn-primary");
 		moreResultsButton.attr("id", "load-more-results");
@@ -140,8 +170,19 @@ $(".results").on("click", "#recipe-result", function() {
 	var pushKey;
 	if (checked) {
 		$(this).siblings("span").html("Recipe Saved!");
+		console.log($(this).parents("div").siblings("a").attr("href"));
+		var url = $(this).parents("div").siblings("a").attr("href");
+		console.log($(this).parents("div").siblings("a").children("img").attr("src"));
+		var imageSRC = $(this).parents("div").siblings("a").children("img").attr("src");
+		console.log($(this).parents("div").siblings("a").children("h2").text());
+		var title = $(this).parents("div").siblings("a").children("h2").text()
 		//add value to firebase
-		var newPush = savedRecipes.push({recipe: value});
+		var newPush = savedRecipes.push({
+			recipe: value,
+			url: url,
+			img: imageSRC,
+			title: title
+		});
 		pushKey = newPush.key;
 		console.log(pushKey);
 		$(this).attr("key", pushKey);
@@ -161,7 +202,7 @@ $(".results").on('click', "#load-more-results", function(){
 	console.log("more please");
 	userState.from += 9;
 	userState.to += 9;
-	console.log(counter)
+	
 	var url = "https://api.edamam.com/search?q=" + userState.ingredients + "&app_idbcb68bd8" + "&app_key=2a8d5e5d4600120a11ab487124231f6c" + "&from=" + userState.from + "&to=" + userState.to + userState.allergies + userState.dietPrefs;
 	console.log(url);
 	
@@ -178,7 +219,16 @@ $(".results").on('click', "#load-more-results", function(){
 
 });
 
-  
+
+savedRecipes.on("value", function(snapshot) {
+	var savedKeys = Object.keys(snapshot.val());
+	console.log(Object.keys(snapshot.val()))
+	savedURI = [];
+	for (var j = 0; j < savedKeys.length; j++) {
+		savedURI.push(snapshot.child(savedKeys[j]).val().recipe)
+	}
+	console.log(savedURI);
+});
 
    
 
