@@ -52,39 +52,37 @@ function recallSavedRecipes() {
 	for (var i = 0; i < savedRecipesURI.length; i++) {
 		var url = "https://api.edamam.com/search?r=" + savedRecipesURI[i] + "&app_idbcb68bd8" + "&app_key=2a8d5e5d4600120a11ab487124231f6c"
 	
-	$.ajax({
-	  	url: url,
-	  	method: 'GET',
-		}).done(function(response) {
-	  	console.log(response);
-	  	
-			if (i === 0 || i%3 === 0) {
-				var newRow = $("<div class = row>");
-				var newColumn = $("<div>");
-				newColumn.addClass("col-xs-12 col-sm-4 col-md-4 col-lg-4");
-				var imageURL = response[0].image;
-				var title = response[0].label;
-				var returnURL = response[0].url;
-				newColumn.append("<a href='" + returnURL + "' target='_blank'>" + "<img class ='recipePhoto' src='" + imageURL + "'/>" + "<h2>" + title + "</h2>" + "</a>" );
-				
-				newRow.append(newColumn);
-				$(".results").append(newRow);
-			} else {
-				var newColumn = $("<div>");
-				newColumn.addClass("col-xs-12 col-sm-4 col-md-4 col-lg-4");
-				var imageURL = response[0].image;
-				var title = response[0].label;
-				var returnURL = response[0].url;
-				newColumn.append("<a href='" + returnURL + "' target='_blank'>" + "<img class ='recipePhoto' src='" + imageURL + "'/>" + "<h2>" + title + "</h2>" + "</a>" );
-				
-				$(".results .row:last-child").append(newColumn);
-			}
+		$.ajax({
+		  	url: url,
+		  	method: 'GET',
+			}).done(function(response) {
+		  	console.log(response);
+		  	
+				if (i === 0 || i%3 === 0) {
+					var newRow = $("<div class = row>");
+					var newColumn = $("<div>");
+					newColumn.addClass("col-xs-12 col-sm-4 col-md-4 col-lg-4");
+					var imageURL = response[0].image;
+					var title = response[0].label;
+					var returnURL = response[0].url;
+					newColumn.append("<a href='" + returnURL + "' target='_blank'>" + "<img class ='recipePhoto' src='" + imageURL + "'/>" + "<h2>" + title + "</h2>" + "</a>" );
+					newRow.append(newColumn);
+					$(".results").append(newRow);
+				} else {
+					var newColumn = $("<div>");
+					newColumn.addClass("col-xs-12 col-sm-4 col-md-4 col-lg-4");
+					var imageURL = response[0].image;
+					var title = response[0].label;
+					var returnURL = response[0].url;
+					newColumn.append("<a href='" + returnURL + "' target='_blank'>" + "<img class ='recipePhoto' src='" + imageURL + "'/>" + "<h2>" + title + "</h2>" + "</a>" );	
+					$(".results .row:last-child").append(newColumn);
+				}
 
-		}).fail(function(err) {
-	  	throw err;
+			}).fail(function(err) {
+		  	throw err;
 		});
-		}
-		}
+	}
+}
 
 
 /*function loadHTML (response) {

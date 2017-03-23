@@ -1,5 +1,3 @@
-
-
 var config = {
     apiKey: "AIzaSyAh--04dzUCt6Iph2w8xn-cHUMx-Yfj6eM",
     authDomain: "nutrition-36cb1.firebaseapp.com",
@@ -79,23 +77,32 @@ $('#submit-search').on('click', function(event){
 });
 
 	function loadHTML (response) {
-		
-		var newColumn = $("<div>");
-		var newCheckbox = $("<div>");
-
 		for (var i = 0; i < response.hits.length; i++) {
-			buildRow(i, response, newColumn, newCheckbox);
-
 			if (i === 0 || i%3 === 0) {
 				var newRow = $("<div class = row>");
-				newColumn.append(newCheckbox);
+				var newColumn = $("<div>");
+				newColumn.addClass("col-xs-12 col-sm-4 col-md-4 col-lg-4");
+				var imageURL = response.hits[i].recipe.image;
+				var title = response.hits[i].recipe.label;
+				var returnURL = response.hits[i].recipe.url;
+				newColumn.append("<a href='" + returnURL + "' target='_blank'>" + "<img class ='recipePhoto' src='" + imageURL + "'/>" + "<h2>" + title + "</h2>" + "</a>" );
+				var newCheckbox = $("<div>");
 				newCheckbox.addClass("checkbox");
+				newCheckbox.append("<label><input type=\"checkbox\" id=\"recipe-result\" value=" + response.hits[i].recipe.uri + "><span>Save Recipe</span></label>");
+				newColumn.append(newCheckbox);
 				newRow.append(newColumn);
 				$(".results").append(newRow);
-				
 			} else {
-				newColumn.append(newCheckbox);
+				var newColumn = $("<div>");
+				newColumn.addClass("col-xs-12 col-sm-4 col-md-4 col-lg-4");
+				var imageURL = response.hits[i].recipe.image;
+				var title = response.hits[i].recipe.label;
+				var returnURL = response.hits[i].recipe.url;
+				newColumn.append("<a href='" + returnURL + "' target='_blank'>" + "<img class ='recipePhoto' src='" + imageURL + "'/>" + "<h2>" + title + "</h2>" + "</a>" );
+				var newCheckbox = $("<div>");
 				newCheckbox.addClass("checkbox recipe-result");
+				newCheckbox.append("<label><input type=\"checkbox\" id=\"recipe-result\" value=" + response.hits[i].recipe.uri + "><span>Save Recipe</span></label>");
+				newColumn.append(newCheckbox);
 				$(".results .row:last-child").append(newColumn);
 			}
 		}
@@ -113,17 +120,7 @@ $('#submit-search').on('click', function(event){
 	}
 	
 
-function buildRow(index, response, newColumn, newCheckbox){
 	
-	newColumn.addClass("col-xs-12 col-sm-4 col-md-4 col-lg-4");
-	var imageURL = response.hits[index].recipe.image;
-	var title = response.hits[index].recipe.label;
-	var returnURL = response.hits[index].recipe.url;
-	newColumn.append("<a href='" + returnURL + "' target='_blank'>" + "<img class ='recipePhoto' src='" + imageURL + "'/>" + "<h2>" + title + "</h2>" + "</a>" );
-	newCheckbox.append("<label><input type=\"checkbox\" id=\"recipe-result\" value=" + response.hits[index].recipe.uri + "><span>Save Recipe</span></label>");
-}	
-
-
 function pullCheckboxValues(array, formgroup){
 	$(formgroup).find($('input[type="checkbox"]:checked')).each(function(){
 		array.push($(this).val());
@@ -178,8 +175,3 @@ $(".results").on('click', "#load-more-results", function(){
 	});
 
 });
-
-  
-
-   
-
