@@ -6,7 +6,7 @@ var config = {
     messagingSenderId: "759784210701"
   };
 
-firebase.initializeApp(config);
+
 
 var database = firebase.database();
 
@@ -16,7 +16,9 @@ var savedRecipesURI = [];
 
 var keys;
 
-savedRecipes.on("value", function(snapshot) {
+$(window).on('click',function(){
+console.log(userState.firebaseUser);
+database.ref("Users").child(userState.firebaseUser).child("Saved Recipes").on("value", function(snapshot) {
 	$(".results").empty();
 	keys = Object.keys(snapshot.val());
 	console.log(keys);
@@ -55,15 +57,11 @@ savedRecipes.on("value", function(snapshot) {
 
 });
 
+
 $(".results").on("click", "button", function() {
 	var removeKey = $(this).attr("key");
     	console.log(removeKey);
     	savedRecipes.child(removeKey).remove();
 });
 	
-
-		
-
-
-
-
+});

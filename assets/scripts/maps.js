@@ -6,7 +6,6 @@ var config = {
     messagingSenderId: "759784210701"
   };
 
-firebase.initializeApp(config);
 
 
 //---Location Scripts Below -----//

@@ -46,7 +46,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 	if(firebaseUser) {
 		console.log(firebaseUser);
 		$(".logout").removeClass("hide");
-		$(".socialbuttons, .login-submit, .register-submit, .checkbox, .join").hide();
+		$(".navigation-bar").hide();
 
 		} else {
 			console.log('not logged in');

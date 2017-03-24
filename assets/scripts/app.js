@@ -10,9 +10,90 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
+// ----------------------------------------------------------------
+// Below is logging in/registering code. ALl of this section is new. 
+
+// Grab our elements here, store in variabeles for quick use
+var txtName = $("#name");
+var txtEmail = $("#exampleInputEmail2");
+var txtPassword = $("#exampleInputPassword2");
+
+// $(".register-submit").submit(function(e){
+$(".login-submit").on("click", e => {
+	event.preventDefault();
+	console.log("submitted");
+	var name = txtName.val();
+	var email = txtEmail.val();
+	var password = txtPassword.val();
+	var auth = firebase.auth();
+	var promise = auth.signInWithEmailAndPassword(email,password);
+	// location.href="index.html";
+	promise.catch(e=> console.log(e.message));
+	});
+
+$(".register-submit").on("click", e => {
+	event.preventDefault();
+	// To do: check for real email here
+	console.log("submitted");
+	var auth = firebase.auth();
+	var name = txtName.val();
+	var email = txtEmail.val();
+	var password = txtPassword.val();
+	var promise = auth.createUserWithEmailAndPassword(email,password);
+	promise.catch(e=> console.log(e.message));
+	var isNewUser = true;
+	console.log(isNewUser);
+
+	firebase.auth().onAuthStateChanged(function(authData) {
+		if (authData && isNewUser) {
+			database.ref().child("Users").child(authData.uid).child("email").set({
+				email
+			})
+		}
+	})
+	});
+	
+$(".logout").on("click", e => {
+	event.preventDefault();
+	firebase.auth().signOut();
+});
+
+firebase.auth().onAuthStateChanged(firebaseUser => {
+	if(firebaseUser) {
+		console.log(firebaseUser);
+		$(".logout").removeClass("hide");
+		$(".navigation-bar").hide();
+		$(".navigation-bar-signedin").removeClass("hide");
+		// Very important line here below, that captures our user ID
+		userState.firebaseUser = firebaseUser.uid;
+		console.log(userState.firebaseUser);
+
+		var dbRef = database.ref("Users").child(userState.firebaseUser);
+		dbRef.once("value")
+			.then(function(snapshot) {
+				$(".welcome-user").html("Welcome, " + snapshot.child("email").val());
+		})
+
+		} else {
+			console.log('not logged in');
+			// $(".logout").addClass("hide");
+			userState.firebaseUser = "";
+			// $(".navigation-bar").show();
+			// $(".welcome-user").empty();
+		}
+	});
+
+$(".logout").on('click', function () {
+	location.reload();
+});
+
+// -----------------------------------------------------------------
+// Below is slightly modified app.js code. Only modified in 2 locations. 
+
 var savedRecipes = database.ref("Saved Recipes");
 
 var savedURI = [];
+
 
 var userState = {
 	ingredients: "",
@@ -20,7 +101,9 @@ var userState = {
 	dietPrefs: "",
 	time: "",
 	from: 0,
-	to: 9
+	to: 9,
+	// Modification Location 1: added a property firebaseUser to store UID
+	firebaseUser: "" 
 }
 
 $('#submit-search').on('click', function(event){
@@ -78,7 +161,7 @@ $('#submit-search').on('click', function(event){
 	$('#ingredients-input').val("");
 
 });
-
+	
 	function loadHTML (response) {
 		for (var i = 0; i < response.hits.length; i++) {
 			if (i === 0 || i%3 === 0) {
@@ -147,6 +230,7 @@ $('#submit-search').on('click', function(event){
 		newLoadRow.append(newLoadColumn);
 		$(".results").append(newLoadRow);
 		$(".end-message").show();
+
 	}
 	
 
@@ -175,7 +259,9 @@ $(".results").on("click", "#recipe-result", function() {
 		console.log($(this).parents("div").siblings("a").children("h2").text());
 		var title = $(this).parents("div").siblings("a").children("h2").text()
 		//add value to firebase
-		var newPush = savedRecipes.push({
+		// Modification 2: On save, pushes to the specific User ID Node
+		console.log(userState.firebaseUser);
+		var newPush = database.ref().child("Users").child(userState.firebaseUser).child("Saved Recipes").push({
 			recipe: value,
 			url: url,
 			img: imageSRC,
@@ -216,7 +302,9 @@ $(".results").on('click', "#load-more-results", function(){
 
 });
 
-savedRecipes.on("value", function(snapshot) {
+$(".main-submit").on('click', function(){
+console.log(userState.firebaseUser);
+	database.ref().child("Users").child(userState.firebaseUser).child("Saved Recipes").on("value", function(snapshot) {
 	var savedKeys = Object.keys(snapshot.val());
 	console.log(Object.keys(snapshot.val()))
 	savedURI = [];
@@ -225,5 +313,7 @@ savedRecipes.on("value", function(snapshot) {
 	}
 	console.log(savedURI);
 });
+})
+
 
    
