@@ -61,7 +61,7 @@ database.ref("Users").child(userState.firebaseUser).child("Saved Recipes").on("v
 $(".results").on("click", "button", function() {
 	var removeKey = $(this).attr("key");
     	console.log(removeKey);
-    	savedRecipes.child(removeKey).remove();
+    	database.ref("Users").child(userState.firebaseUser).child("Saved Recipes").child(removeKey).remove();
 });
 	
 });
