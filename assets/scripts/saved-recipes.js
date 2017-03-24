@@ -16,8 +16,9 @@ var savedRecipesURI = [];
 
 var keys;
 
-$(window).on('click',function(){
+//$(window).on('click',function(){
 console.log(userState.firebaseUser);
+database.ref().on("value", function(superSnapshot) {
 database.ref("Users").child(userState.firebaseUser).child("Saved Recipes").on("value", function(snapshot) {
 	$(".results").empty();
 	keys = Object.keys(snapshot.val());
@@ -65,3 +66,5 @@ $(".results").on("click", "button", function() {
 });
 	
 });
+
+//});
