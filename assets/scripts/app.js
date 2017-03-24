@@ -46,7 +46,7 @@ $(".register-submit").on("click", e => {
 
 	firebase.auth().onAuthStateChanged(function(authData) {
 		if (authData && isNewUser) {
-			database.ref().child("Users").child(authData.uid).child("email").set({
+			database.ref().child("Users").child(authData.uid).set({
 				email
 			})
 		}
