@@ -110,6 +110,9 @@ $('#submit-search').on('click', function(event){
 	
 	event.preventDefault();
 	$(".results").empty();
+	userState.from = 0;
+	userState.to = 9;
+
 	//counter = 0;
 
 	if( $('#ingredients-input').val() === ""){
@@ -159,6 +162,7 @@ $('#submit-search').on('click', function(event){
 
 	}
 	$('#ingredients-input').val("");
+	$('input:checked').prop('checked', false);
 
 });
 	
@@ -238,9 +242,9 @@ $('#submit-search').on('click', function(event){
 function pullCheckboxValues(array, formgroup){
 	$(formgroup).find($('input[type="checkbox"]:checked')).each(function(){
 		array.push($(this).val());
-		database.ref("Allergies").set({
+		/*database.ref("Allergies").set({
 			allergiesList: userState.allergies
-		});
+		});*/
 	});
 }
 //add text change upon click and also save the response.hits[i].recipe.uri to firebase - can use uri for ajax request for saved recipes
