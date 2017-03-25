@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-	<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>Best B4</title>
+
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Best B4</title>
+
 
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
-		<!-- jQuery -->
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     
     <!-- CSS Reset -->
@@ -20,8 +22,8 @@
     <link type="text/css" rel="stylesheet" href="assets/css/style.css"/>
 
     
-	</head>
-	<body>
+  </head>
+  <body>
 
   <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -42,11 +44,31 @@
       <li class="active"><a href="index.html">Home<span class="sr-only">(current)</span></a></li>
         <li><a href="statement.html">Our Mission<span class="sr-only">(current)</span></a></li>
         <li><a href="donate.html">Donate your food</a></li>
-        <li><a href="volunteer.html">Volunteer<span class="sr-only">(current)</span></a></li>
-        <li><a href="saved-recipes.html">Saved Recipes<span class="sr-only">(current)</span></a></li>
+        <li><a href="saved-recipes.html">Saved Recipes<span class="sr-only saved-recipes-file">(current)</span></a></li>
       </ul>
-      
-<ul class="nav navbar-nav navbar-right">
+
+
+
+<ul class="nav navbar-nav navbar-right navigation-bar-signedin hide">
+  <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="welcome-user"></span></a>
+          <ul id="login-dp" class="dropdown-menu">
+            <li>
+               <div class="row">
+                  <div class="col-md-12 btn-block">
+                    <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block  hide logout text-right">Log Out</button>
+                      </div>
+                    </form>
+                  </div>
+              </div>
+            </li>
+          </ul>
+  </li>
+</ul>
+
+<ul class="nav navbar-nav navbar-right navigation-bar">
         <li><p class="navbar-text">Already have an account?</p></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
@@ -54,12 +76,12 @@
         <li>
            <div class="row">
               <div class="col-md-12">
-                Login via
-                <div class="social-buttons">
+              <!--   Login via -->
+               <!--  <div class="social-buttons">
                   <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
                   <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
-                </div>
-                                or
+                </div> -->
+                               <!--  or -->
                  <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
                     <div class="form-group">
                        <label class="sr-only" for="exampleInputEmail2">Email address</label>
@@ -68,21 +90,24 @@
                     <div class="form-group">
                        <label class="sr-only" for="exampleInputPassword2">Password</label>
                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
-                                             <div class="help-block text-right"><a href="">Forget the password ?</a></div>
+                                             <div class="help-block text-right"><a href="">Forgot your password?</a></div>
                     </div>
                     <div class="form-group">
-                       <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                       <button type="submit" class="btn btn-primary btn-block login-submit">Log in</button>
+                    </div>
+                    <div class="form-group">
+                       <button type="submit" class="btn btn-primary btn-block register-submit">Register</button>
                     </div>
                     <div class="checkbox">
                        <label>
-                       <input type="checkbox"> keep me logged-in
+                       <input type="checkbox"> Keep me logged-in
                        </label>
                     </div>
                  </form>
               </div>
-              <div class="bottom text-center">
+              <!-- <div class="bottom text-center">
                 New here ? <a href="#"><b>Join Us</b></a>
-              </div>
+              </div> -->
            </div>
         </li>
       </ul>
@@ -94,75 +119,75 @@
 
  
 
-		<div class="container">
+    <div class="container">
     <div class="jumbotron">
       <h1 class="text-center title">BEST B4</h1>
       <h3 class="text-center">"Using your ingredients"</h3>
     </div>
 
-			<div class="row">
-        		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
-          			<div class="panel panel-default">
-            			<div class="panel-heading">
-              				<h3 class="panel-title">Search for a recipe</h3>
-            			</div>
-            			<div class="panel-body">
-              				<form>
-                				<div class="form-group">
-                  					<label for="ingredients">Ingredients</label>
-                  					<input class="form-control" id="ingredients-input" type="text">
-                				</div>
+      <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                      <h3 class="panel-title">Search for a recipe</h3>
+                  </div>
+                  <div class="panel-body">
+                      <form>
+                        <div class="form-group">
+                            <label for="ingredients">Ingredients</label>
+                            <input class="form-control" id="ingredients-input" type="text">
+                        </div>
                         <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Advanced Options</button>
                         <div id="demo" class="collapse">
     
   
-                				<div class="form-group allergyList">
-                					<label for="allergies">Allergies</label>
-                					<div class="checkbox">
-      									<label><input type="checkbox" value="dairy-free">Dairy</label>
-    								</div>
-    								<div class="checkbox">
-      								<label><input type="checkbox" value="egg-free">Egg</label>
-    								</div>
-    								<div class="checkbox">
-      									<label><input type="checkbox" value="gluten-free">Gluten</label>
-    								</div>
-    								<div class="checkbox">
-      									<label><input type="checkbox" value="peanut-free">Peanut</label>
-    								</div>
-    								<div class="checkbox">
+                        <div class="form-group allergyList">
+                          <label for="allergies">Allergies</label>
+                          <div class="checkbox">
+                        <label><input type="checkbox" value="dairy-free">Dairy</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="egg-free">Egg</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="gluten-free">Gluten</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="peanut-free">Peanut</label>
+                    </div>
+                    <div class="checkbox">
 
-      									<label><input type="checkbox" value="fish-free shellfish-free crustacean-free">Seafood</label>
-    								</div>
-    								<div class="checkbox">
-      									<label><input type="checkbox" value="sesame-free">Sesame</label>
-    								</div>
-	    							<div class="checkbox">
-	      								<label><input type="checkbox" value="soy-free">Soy</label>
-	    							</div>
-	    							<div class="checkbox">
-	      								<label><input type="checkbox" value="tree-nut-free">Tree Nut</label>
-	    							</div>
-	    							<div class="checkbox">
-	      								<label><input type="checkbox" value="wheat-free">Wheat</label>
-	    							</div>
-	    						</div>
-	    						<div class="form-group dietPrefs">
-                					<label for="preferences">Dietary Preferences</label>
-                					<div class="checkbox">
-      									<label><input type="checkbox" value="kosher">Kosher</label>
-    								</div>
-    								<div class="checkbox">
-      									<label><input type="checkbox" value="pescetarian">Pescetarian</label>
-    								</div>
-    								<div class="checkbox">
-      									<label><input type="checkbox" value="vegan">Vegan</label>
-    								</div>
-    								<div class="checkbox">
-      									<label><input type="checkbox" value="vegetarian">Vegetarian</label>
-    								</div>
-   	    						</div>
-   	    						<!-- <div class="form-group">
+                        <label><input type="checkbox" value="fish-free shellfish-free crustacean-free">Seafood</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="sesame-free">Sesame</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="soy-free">Soy</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="tree-nut-free">Tree Nut</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="wheat-free">Wheat</label>
+                    </div>
+                  </div>
+                  <div class="form-group dietPrefs">
+                          <label for="preferences">Dietary Preferences</label>
+                          <div class="checkbox">
+                        <label><input type="checkbox" value="kosher">Kosher</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="pescetarian">Pescetarian</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="vegan">Vegan</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="vegetarian">Vegetarian</label>
+                    </div>
+                    </div>
+                    <!-- <div class="form-group">
                       <label for="sel1">Max Preparation Time</label>
                                           <select class="form-control time-input" id="sel1">
                                             <option>Choose time</option>
@@ -174,34 +199,34 @@
                                       </select>
                                     </div> -->
                 </div>
-                				<button class="btn btn-primary" id="submit-search" type="submit">Submit</button>
-              				</form>
-            			</div>
-          			</div>
-        		</div>  
-			</div> <!-- Close Form -->
-		
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="panel panel-default results-section">
-            		<div class="panel-heading">
-              			<h3 class="panel-title">Results</h3>
-            		</div>
-            		<div class="panel-body">
+                        <button class="btn btn-primary main-submit" id="submit-search" type="submit">Submit</button>
+                      </form>
+                  </div>
+                </div>
+            </div>  
+      </div> <!-- Close Form -->
+    
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default results-section">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Results</h3>
+                </div>
+                <div class="panel-body">
                   <div class="results"></div>
                   <div class="end-message"><h3>Haven't spotted the perfect recipe? Consider donating at your local <a href="donate.html">food pantry</a> or visit <a href="restaurant.html">these nearby restaurants</a> instead.</h3></div>
-            		</div>
-            	</div>
+                </div>
+              </div>
             </div>
         </div> <!-- Close results -->
-    </div> <!--Close container -->	
+    </div> <!--Close container -->  
 
 
-	<!-- Firebase Reference -->
+  <!-- Firebase Reference -->
     <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
     <!-- Javascript -->
     <script src="assets/scripts/app.js"></script>
-		
-	
-	</body>
+    
+  
+  </body>
 </html>

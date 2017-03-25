@@ -6,7 +6,7 @@ var config = {
     messagingSenderId: "759784210701"
   };
 
-firebase.initializeApp(config);
+
 
 var database = firebase.database();
 
@@ -16,108 +16,55 @@ var savedRecipesURI = [];
 
 var keys;
 
-savedRecipes.on("value", function(snapshot) {
+//$(window).on('click',function(){
+console.log(userState.firebaseUser);
+database.ref().on("value", function(superSnapshot) {
+database.ref("Users").child(userState.firebaseUser).child("Saved Recipes").on("value", function(snapshot) {
+	$(".results").empty();
 	keys = Object.keys(snapshot.val());
 	console.log(keys);
 	//console.log(uri);
 	for (var i = 0; i < keys.length; i++) {
-		var uri = snapshot.child(keys[i]).val().recipe;
-		var encodedURI =  encodeURIComponent(uri);
-		console.log(encodedURI);
-		//savedRecipesURI.push(uri)
-		//var url = "https://api.edamam.com/search?r=" + uri + "&app_idbcb68bd8" + "&app_key=2a8d5e5d4600120a11ab487124231f6c"
-		//console.log(url);
-		savedRecipesURI.push(encodedURI);
+		if (i === 0 || i%3 === 0) {
+			var newRow = $("<div class = row>");
+			var newColumn = $("<div>");
+			newColumn.addClass("col-xs-4 col-sm-4 col-md-4 col-lg-4");
+			var imageURL = snapshot.child(keys[i]).val().img;
+			var title = snapshot.child(keys[i]).val().title;
+			var returnURL = snapshot.child(keys[i]).val().url;
+			newColumn.append("<a href='" + returnURL + "' target='_blank'>" + "<img class ='recipePhoto' src='" + imageURL + "'/>" + "<h2>" + title + "</h2>" + "</a>" );
+			var trashButton = $("<button>");
+			trashButton.addClass("btn btn-default btn-sm");
+			trashButton.attr("key", keys[i]);
+			trashButton.append("<span class='glyphicon glyphicon-trash'></span>  Delete recipe");
+			newColumn.append(trashButton);
+			newRow.append(newColumn);
+			$(".results").append(newRow);
+		} else {
+			var newColumn = $("<div>");
+			newColumn.addClass("col-xs-4 col-sm-4 col-md-4 col-lg-4");
+			var imageURL = snapshot.child(keys[i]).val().img;
+			var title = snapshot.child(keys[i]).val().title;
+			var returnURL = snapshot.child(keys[i]).val().url;
+			newColumn.append("<a href='" + returnURL + "' target='_blank'>" + "<img class ='recipePhoto' src='" + imageURL + "'/>" + "<h2>" + title + "</h2>" + "</a>" );
+			var trashButton = $("<button>");
+			trashButton.addClass("btn btn-default btn-sm");
+			trashButton.attr("key", keys[i]);
+			trashButton.append("<span class='glyphicon glyphicon-trash'></span>  Delete recipe");
+			newColumn.append(trashButton);
+			$(".results .row:last-child").append(newColumn);
+		}
 	}
-	console.log(savedRecipesURI)
-	recallSavedRecipes();
+
+});
+
+
+$(".results").on("click", "button", function() {
+	var removeKey = $(this).attr("key");
+    	console.log(removeKey);
+    	database.ref("Users").child(userState.firebaseUser).child("Saved Recipes").child(removeKey).remove();
 });
 	
+});
 
-		/*$.ajax({
-	  	url: url,
-	  	method: 'GET',
-		}).done(function(response) {
-	  	console.log(response);
-	  	loadHTML(response);
-		}).fail(function(err) {
-	  	throw err;
-		});
-		}
-		
-
-})*/
-
-function recallSavedRecipes() {
-	for (var i = 0; i < savedRecipesURI.length; i++) {
-		var url = "https://api.edamam.com/search?r=" + savedRecipesURI[i] + "&app_idbcb68bd8" + "&app_key=2a8d5e5d4600120a11ab487124231f6c"
-	
-		$.ajax({
-		  	url: url,
-		  	method: 'GET',
-			}).done(function(response) {
-		  	console.log(response);
-		  	
-				if (i === 0 || i%3 === 0) {
-					var newRow = $("<div class = row>");
-					var newColumn = $("<div>");
-					newColumn.addClass("col-xs-12 col-sm-4 col-md-4 col-lg-4");
-					var imageURL = response[0].image;
-					var title = response[0].label;
-					var returnURL = response[0].url;
-					newColumn.append("<a href='" + returnURL + "' target='_blank'>" + "<img class ='recipePhoto' src='" + imageURL + "'/>" + "<h2>" + title + "</h2>" + "</a>" );
-					newRow.append(newColumn);
-					$(".results").append(newRow);
-				} else {
-					var newColumn = $("<div>");
-					newColumn.addClass("col-xs-12 col-sm-4 col-md-4 col-lg-4");
-					var imageURL = response[0].image;
-					var title = response[0].label;
-					var returnURL = response[0].url;
-					newColumn.append("<a href='" + returnURL + "' target='_blank'>" + "<img class ='recipePhoto' src='" + imageURL + "'/>" + "<h2>" + title + "</h2>" + "</a>" );	
-					$(".results .row:last-child").append(newColumn);
-				}
-
-			}).fail(function(err) {
-		  	throw err;
-		});
-	}
-}
-
-
-/*function loadHTML (response) {
-		for (var i = 0; i < savedRecipesURI.length; i++) {
-			if (i === 0 || i%3 === 0) {
-				var newRow = $("<div class = row>");
-				var newColumn = $("<div>");
-				newColumn.addClass("col-xs-12 col-sm-4 col-md-4 col-lg-4");
-				var imageURL = response.hits[i].recipe.image;
-				var title = response.hits[i].recipe.label;
-				var returnURL = response.hits[i].recipe.url;
-				newColumn.append("<a href='" + returnURL + "' target='_blank'>" + "<img class ='recipePhoto' src='" + imageURL + "'/>" + "<h2>" + title + "</h2>" + "</a>" );
-				
-				newRow.append(newColumn);
-				$(".results").append(newRow);
-			} else {
-				var newColumn = $("<div>");
-				newColumn.addClass("col-xs-12 col-sm-4 col-md-4 col-lg-4");
-				var imageURL = response.hits[i].recipe.image;
-				var title = response.hits[i].recipe.label;
-				var returnURL = response.hits[i].recipe.url;
-				newColumn.append("<a href='" + returnURL + "' target='_blank'>" + "<img class ='recipePhoto' src='" + imageURL + "'/>" + "<h2>" + title + "</h2>" + "</a>" );
-				
-				$(".results .row:last-child").append(newColumn);
-			}
-		
-		var newLoadRow = $("<div class = row>");
-		var newLoadColumn = $("<div>");
-		newLoadColumn.addClass("col-xs-12 col-sm-4 col-md-4 col-lg-4");
-		var moreResultsButton = $("<button>");
-		moreResultsButton.addClass("btn btn-primary");
-		moreResultsButton.attr("id", "load-more-results");
-		moreResultsButton.text("Show More Results");
-		newLoadColumn.append(moreResultsButton);
-		newLoadRow.append(newLoadColumn);
-		$(".results").append(newLoadRow);
-	}
-*/
+//});
