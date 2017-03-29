@@ -115,7 +115,7 @@ function searchForRecipes(){
 	  if(response.count != 0){
 	  	loadHTML(response);
 	  } else {
-	  	//vslidation rule for no results
+	  	//validation rule for no results
 	  	$('.results').prepend("<p>There are no results for your search.</p>");
 	  }
 	  
